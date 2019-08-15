@@ -1,4 +1,4 @@
-﻿namespace zavrsni_rad
+﻿namespace SortingAlgorithmTests
 {
     partial class MainUI
     {
@@ -29,22 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.btnStartAlgorithmTests = new System.Windows.Forms.Button();
             this._label_test_count = new System.Windows.Forms.Label();
             this.dropdownTestCount = new System.Windows.Forms.ComboBox();
@@ -53,18 +38,10 @@
             this._label_test3 = new System.Windows.Forms.Label();
             this._label_test4 = new System.Windows.Forms.Label();
             this._label_test5 = new System.Windows.Forms.Label();
-            this._label_select_algorithm = new System.Windows.Forms.Label();
-            this.cbAlgorithmSelectSort = new System.Windows.Forms.CheckBox();
-            this.cbAlgorithmBubbleSort = new System.Windows.Forms.CheckBox();
-            this.cbAlgorithmInsertionSort = new System.Windows.Forms.CheckBox();
-            this.cbAlgorithmQuickSort = new System.Windows.Forms.CheckBox();
-            this.cbAlgorithmMergeSort = new System.Windows.Forms.CheckBox();
             this.load_file = new System.Windows.Forms.Button();
-            this._label_test_type = new System.Windows.Forms.Label();
             this.dropdownTestType = new System.Windows.Forms.ComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this._label_file_name = new System.Windows.Forms.Label();
-            this.cbAlgorithmHeapSort = new System.Windows.Forms.CheckBox();
             this.tbToolTip = new System.Windows.Forms.ToolTip(this.components);
             this._label_min_value = new System.Windows.Forms.Label();
             this._label_max_value = new System.Windows.Forms.Label();
@@ -81,9 +58,13 @@
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.btnStopTesting = new System.Windows.Forms.Button();
-            this.barChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.lineChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btnClearChart = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbAlgs = new System.Windows.Forms.ListBox();
+            this.btnAddRemoveAlgs = new System.Windows.Forms.Button();
+            this.clbAlgorithms = new System.Windows.Forms.CheckedListBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbTest1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTest2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTest3)).BeginInit();
@@ -91,15 +72,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbTest5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMinValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMaxValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lineChart)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartAlgorithmTests
             // 
-            this.btnStartAlgorithmTests.Location = new System.Drawing.Point(252, 226);
+            this.btnStartAlgorithmTests.Location = new System.Drawing.Point(18, 34);
             this.btnStartAlgorithmTests.Name = "btnStartAlgorithmTests";
-            this.btnStartAlgorithmTests.Size = new System.Drawing.Size(90, 23);
+            this.btnStartAlgorithmTests.Size = new System.Drawing.Size(180, 23);
             this.btnStartAlgorithmTests.TabIndex = 0;
             this.btnStartAlgorithmTests.Text = "Pokreni";
             this.btnStartAlgorithmTests.UseVisualStyleBackColor = true;
@@ -108,7 +91,7 @@
             // _label_test_count
             // 
             this._label_test_count.AutoSize = true;
-            this._label_test_count.Location = new System.Drawing.Point(12, 115);
+            this._label_test_count.Location = new System.Drawing.Point(23, 21);
             this._label_test_count.Name = "_label_test_count";
             this._label_test_count.Size = new System.Drawing.Size(63, 13);
             this._label_test_count.TabIndex = 1;
@@ -124,7 +107,7 @@
             "3",
             "4",
             "5"});
-            this.dropdownTestCount.Location = new System.Drawing.Point(15, 131);
+            this.dropdownTestCount.Location = new System.Drawing.Point(26, 37);
             this.dropdownTestCount.Name = "dropdownTestCount";
             this.dropdownTestCount.Size = new System.Drawing.Size(60, 21);
             this.dropdownTestCount.TabIndex = 2;
@@ -133,7 +116,7 @@
             // _label_test1
             // 
             this._label_test1.AutoSize = true;
-            this._label_test1.Location = new System.Drawing.Point(109, 114);
+            this._label_test1.Location = new System.Drawing.Point(133, 21);
             this._label_test1.Name = "_label_test1";
             this._label_test1.Size = new System.Drawing.Size(36, 13);
             this._label_test1.TabIndex = 8;
@@ -142,7 +125,7 @@
             // _label_test2
             // 
             this._label_test2.AutoSize = true;
-            this._label_test2.Location = new System.Drawing.Point(249, 114);
+            this._label_test2.Location = new System.Drawing.Point(244, 22);
             this._label_test2.Name = "_label_test2";
             this._label_test2.Size = new System.Drawing.Size(36, 13);
             this._label_test2.TabIndex = 9;
@@ -151,7 +134,7 @@
             // _label_test3
             // 
             this._label_test3.AutoSize = true;
-            this._label_test3.Location = new System.Drawing.Point(389, 114);
+            this._label_test3.Location = new System.Drawing.Point(23, 75);
             this._label_test3.Name = "_label_test3";
             this._label_test3.Size = new System.Drawing.Size(36, 13);
             this._label_test3.TabIndex = 10;
@@ -160,7 +143,7 @@
             // _label_test4
             // 
             this._label_test4.AutoSize = true;
-            this._label_test4.Location = new System.Drawing.Point(529, 114);
+            this._label_test4.Location = new System.Drawing.Point(133, 75);
             this._label_test4.Name = "_label_test4";
             this._label_test4.Size = new System.Drawing.Size(36, 13);
             this._label_test4.TabIndex = 11;
@@ -169,80 +152,16 @@
             // _label_test5
             // 
             this._label_test5.AutoSize = true;
-            this._label_test5.Location = new System.Drawing.Point(669, 115);
+            this._label_test5.Location = new System.Drawing.Point(244, 75);
             this._label_test5.Name = "_label_test5";
             this._label_test5.Size = new System.Drawing.Size(36, 13);
             this._label_test5.TabIndex = 12;
             this._label_test5.Text = "5. test";
             // 
-            // _label_select_algorithm
-            // 
-            this._label_select_algorithm.AutoSize = true;
-            this._label_select_algorithm.Location = new System.Drawing.Point(12, 58);
-            this._label_select_algorithm.Name = "_label_select_algorithm";
-            this._label_select_algorithm.Size = new System.Drawing.Size(46, 13);
-            this._label_select_algorithm.TabIndex = 13;
-            this._label_select_algorithm.Text = "Algoritmi";
-            // 
-            // cbAlgorithmSelectSort
-            // 
-            this.cbAlgorithmSelectSort.AutoSize = true;
-            this.cbAlgorithmSelectSort.Enabled = false;
-            this.cbAlgorithmSelectSort.Location = new System.Drawing.Point(392, 80);
-            this.cbAlgorithmSelectSort.Name = "cbAlgorithmSelectSort";
-            this.cbAlgorithmSelectSort.Size = new System.Drawing.Size(90, 17);
-            this.cbAlgorithmSelectSort.TabIndex = 15;
-            this.cbAlgorithmSelectSort.Text = "Selection sort";
-            this.cbAlgorithmSelectSort.UseVisualStyleBackColor = true;
-            // 
-            // cbAlgorithmBubbleSort
-            // 
-            this.cbAlgorithmBubbleSort.AutoSize = true;
-            this.cbAlgorithmBubbleSort.Enabled = false;
-            this.cbAlgorithmBubbleSort.Location = new System.Drawing.Point(112, 57);
-            this.cbAlgorithmBubbleSort.Name = "cbAlgorithmBubbleSort";
-            this.cbAlgorithmBubbleSort.Size = new System.Drawing.Size(79, 17);
-            this.cbAlgorithmBubbleSort.TabIndex = 16;
-            this.cbAlgorithmBubbleSort.Text = "Bubble sort";
-            this.cbAlgorithmBubbleSort.UseVisualStyleBackColor = true;
-            // 
-            // cbAlgorithmInsertionSort
-            // 
-            this.cbAlgorithmInsertionSort.AutoSize = true;
-            this.cbAlgorithmInsertionSort.Enabled = false;
-            this.cbAlgorithmInsertionSort.Location = new System.Drawing.Point(392, 57);
-            this.cbAlgorithmInsertionSort.Name = "cbAlgorithmInsertionSort";
-            this.cbAlgorithmInsertionSort.Size = new System.Drawing.Size(86, 17);
-            this.cbAlgorithmInsertionSort.TabIndex = 17;
-            this.cbAlgorithmInsertionSort.Text = "Insertion sort";
-            this.cbAlgorithmInsertionSort.UseVisualStyleBackColor = true;
-            // 
-            // cbAlgorithmQuickSort
-            // 
-            this.cbAlgorithmQuickSort.AutoSize = true;
-            this.cbAlgorithmQuickSort.Enabled = false;
-            this.cbAlgorithmQuickSort.Location = new System.Drawing.Point(252, 80);
-            this.cbAlgorithmQuickSort.Name = "cbAlgorithmQuickSort";
-            this.cbAlgorithmQuickSort.Size = new System.Drawing.Size(74, 17);
-            this.cbAlgorithmQuickSort.TabIndex = 18;
-            this.cbAlgorithmQuickSort.Text = "Quick sort";
-            this.cbAlgorithmQuickSort.UseVisualStyleBackColor = true;
-            // 
-            // cbAlgorithmMergeSort
-            // 
-            this.cbAlgorithmMergeSort.AutoSize = true;
-            this.cbAlgorithmMergeSort.Enabled = false;
-            this.cbAlgorithmMergeSort.Location = new System.Drawing.Point(112, 80);
-            this.cbAlgorithmMergeSort.Name = "cbAlgorithmMergeSort";
-            this.cbAlgorithmMergeSort.Size = new System.Drawing.Size(76, 17);
-            this.cbAlgorithmMergeSort.TabIndex = 19;
-            this.cbAlgorithmMergeSort.Text = "Merge sort";
-            this.cbAlgorithmMergeSort.UseVisualStyleBackColor = true;
-            // 
             // load_file
             // 
             this.load_file.Enabled = false;
-            this.load_file.Location = new System.Drawing.Point(392, 16);
+            this.load_file.Location = new System.Drawing.Point(237, 37);
             this.load_file.Name = "load_file";
             this.load_file.Size = new System.Drawing.Size(100, 23);
             this.load_file.TabIndex = 20;
@@ -250,22 +169,13 @@
             this.load_file.UseVisualStyleBackColor = true;
             this.load_file.Click += new System.EventHandler(this.load_file_Click);
             // 
-            // _label_test_type
-            // 
-            this._label_test_type.AutoSize = true;
-            this._label_test_type.Location = new System.Drawing.Point(12, 21);
-            this._label_test_type.Name = "_label_test_type";
-            this._label_test_type.Size = new System.Drawing.Size(76, 13);
-            this._label_test_type.TabIndex = 21;
-            this._label_test_type.Text = "Vrsta testiranja";
-            // 
             // dropdownTestType
             // 
             this.dropdownTestType.FormattingEnabled = true;
             this.dropdownTestType.Items.AddRange(new object[] {
             "Psudoslučajne vrijednosti",
             "Podaci iz vanjske datoteke"});
-            this.dropdownTestType.Location = new System.Drawing.Point(115, 18);
+            this.dropdownTestType.Location = new System.Drawing.Point(19, 39);
             this.dropdownTestType.Name = "dropdownTestType";
             this.dropdownTestType.Size = new System.Drawing.Size(160, 21);
             this.dropdownTestType.TabIndex = 22;
@@ -278,22 +188,11 @@
             // _label_file_name
             // 
             this._label_file_name.AutoSize = true;
-            this._label_file_name.Location = new System.Drawing.Point(529, 21);
+            this._label_file_name.Location = new System.Drawing.Point(374, 42);
             this._label_file_name.Name = "_label_file_name";
             this._label_file_name.Size = new System.Drawing.Size(69, 13);
             this._label_file_name.TabIndex = 23;
             this._label_file_name.Text = "Ime datoteke";
-            // 
-            // cbAlgorithmHeapSort
-            // 
-            this.cbAlgorithmHeapSort.AutoSize = true;
-            this.cbAlgorithmHeapSort.Enabled = false;
-            this.cbAlgorithmHeapSort.Location = new System.Drawing.Point(252, 57);
-            this.cbAlgorithmHeapSort.Name = "cbAlgorithmHeapSort";
-            this.cbAlgorithmHeapSort.Size = new System.Drawing.Size(72, 17);
-            this.cbAlgorithmHeapSort.TabIndex = 24;
-            this.cbAlgorithmHeapSort.Text = "Heap sort";
-            this.cbAlgorithmHeapSort.UseVisualStyleBackColor = true;
             // 
             // tbToolTip
             // 
@@ -302,20 +201,20 @@
             // _label_min_value
             // 
             this._label_min_value.AutoSize = true;
-            this._label_min_value.Location = new System.Drawing.Point(31, 180);
+            this._label_min_value.Location = new System.Drawing.Point(23, 133);
             this._label_min_value.Name = "_label_min_value";
-            this._label_min_value.Size = new System.Drawing.Size(174, 13);
+            this._label_min_value.Size = new System.Drawing.Size(73, 13);
             this._label_min_value.TabIndex = 25;
-            this._label_min_value.Text = "Najmanja moguća vrijednost u polju";
+            this._label_min_value.Text = "Donja granica";
             // 
             // _label_max_value
             // 
             this._label_max_value.AutoSize = true;
-            this._label_max_value.Location = new System.Drawing.Point(462, 180);
+            this._label_max_value.Location = new System.Drawing.Point(133, 133);
             this._label_max_value.Name = "_label_max_value";
-            this._label_max_value.Size = new System.Drawing.Size(170, 13);
+            this._label_max_value.Size = new System.Drawing.Size(76, 13);
             this._label_max_value.TabIndex = 27;
-            this._label_max_value.Text = "Najveća moguća vrijednost u polju";
+            this._label_max_value.Text = "Gornja granica";
             // 
             // tbTest1
             // 
@@ -325,7 +224,7 @@
             0,
             0,
             0});
-            this.tbTest1.Location = new System.Drawing.Point(115, 132);
+            this.tbTest1.Location = new System.Drawing.Point(136, 38);
             this.tbTest1.Maximum = new decimal(new int[] {
             -1,
             0,
@@ -343,7 +242,7 @@
             0,
             0,
             0});
-            this.tbTest2.Location = new System.Drawing.Point(252, 132);
+            this.tbTest2.Location = new System.Drawing.Point(247, 38);
             this.tbTest2.Maximum = new decimal(new int[] {
             -1,
             0,
@@ -361,7 +260,7 @@
             0,
             0,
             0});
-            this.tbTest3.Location = new System.Drawing.Point(392, 132);
+            this.tbTest3.Location = new System.Drawing.Point(26, 91);
             this.tbTest3.Maximum = new decimal(new int[] {
             -1,
             0,
@@ -379,7 +278,7 @@
             0,
             0,
             0});
-            this.tbTest4.Location = new System.Drawing.Point(532, 132);
+            this.tbTest4.Location = new System.Drawing.Point(136, 91);
             this.tbTest4.Maximum = new decimal(new int[] {
             -1,
             0,
@@ -397,7 +296,7 @@
             0,
             0,
             0});
-            this.tbTest5.Location = new System.Drawing.Point(672, 132);
+            this.tbTest5.Location = new System.Drawing.Point(247, 91);
             this.tbTest5.Maximum = new decimal(new int[] {
             -1,
             0,
@@ -415,7 +314,7 @@
             0,
             0,
             0});
-            this.tbMinValue.Location = new System.Drawing.Point(252, 178);
+            this.tbMinValue.Location = new System.Drawing.Point(26, 149);
             this.tbMinValue.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -438,7 +337,7 @@
             0,
             0,
             0});
-            this.tbMaxValue.Location = new System.Drawing.Point(672, 178);
+            this.tbMaxValue.Location = new System.Drawing.Point(136, 149);
             this.tbMaxValue.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -455,17 +354,17 @@
             // 
             // testProgress
             // 
-            this.testProgress.Location = new System.Drawing.Point(15, 226);
+            this.testProgress.Location = new System.Drawing.Point(12, 393);
             this.testProgress.Name = "testProgress";
-            this.testProgress.Size = new System.Drawing.Size(190, 23);
+            this.testProgress.Size = new System.Drawing.Size(747, 23);
             this.testProgress.TabIndex = 36;
             // 
             // btnSaveTestResults
             // 
             this.btnSaveTestResults.Enabled = false;
-            this.btnSaveTestResults.Location = new System.Drawing.Point(672, 226);
+            this.btnSaveTestResults.Location = new System.Drawing.Point(529, 34);
             this.btnSaveTestResults.Name = "btnSaveTestResults";
-            this.btnSaveTestResults.Size = new System.Drawing.Size(90, 23);
+            this.btnSaveTestResults.Size = new System.Drawing.Size(180, 23);
             this.btnSaveTestResults.TabIndex = 37;
             this.btnSaveTestResults.Text = "Spremi rezultate";
             this.btnSaveTestResults.UseVisualStyleBackColor = true;
@@ -488,182 +387,123 @@
             // btnStopTesting
             // 
             this.btnStopTesting.Enabled = false;
-            this.btnStopTesting.Location = new System.Drawing.Point(392, 226);
+            this.btnStopTesting.Location = new System.Drawing.Point(269, 34);
             this.btnStopTesting.Name = "btnStopTesting";
-            this.btnStopTesting.Size = new System.Drawing.Size(90, 23);
+            this.btnStopTesting.Size = new System.Drawing.Size(180, 23);
             this.btnStopTesting.TabIndex = 39;
             this.btnStopTesting.Text = "Zaustavi";
             this.btnStopTesting.UseVisualStyleBackColor = true;
             this.btnStopTesting.Click += new System.EventHandler(this.btnStopTesting_Click);
             // 
-            // barChart
+            // groupBox1
             // 
-            chartArea3.AxisX.Title = "Redni broj testa";
-            chartArea3.AxisY.Title = "Vrijeme u sekundama";
-            chartArea3.Name = "ChartArea1";
-            this.barChart.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.barChart.Legends.Add(legend3);
-            this.barChart.Location = new System.Drawing.Point(15, 276);
-            this.barChart.Name = "barChart";
-            series13.ChartArea = "ChartArea1";
-            series13.IsValueShownAsLabel = true;
-            series13.LabelAngle = -90;
-            series13.LabelFormat = "{0.00000}";
-            series13.Legend = "Legend1";
-            series13.Name = "Bubble";
-            series13.SmartLabelStyle.Enabled = false;
-            series13.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series13.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Bottom)));
-            series14.ChartArea = "ChartArea1";
-            series14.IsValueShownAsLabel = true;
-            series14.LabelAngle = -90;
-            series14.LabelFormat = "{0.00000}";
-            series14.Legend = "Legend1";
-            series14.Name = "Heap";
-            series14.SmartLabelStyle.Enabled = false;
-            series14.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series14.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Bottom)));
-            series15.ChartArea = "ChartArea1";
-            series15.IsValueShownAsLabel = true;
-            series15.LabelAngle = -90;
-            series15.LabelFormat = "{0.00000}";
-            series15.Legend = "Legend1";
-            series15.Name = "Insertion";
-            series15.SmartLabelStyle.Enabled = false;
-            series15.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series15.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Bottom)));
-            series16.ChartArea = "ChartArea1";
-            series16.IsValueShownAsLabel = true;
-            series16.LabelAngle = -90;
-            series16.LabelFormat = "{0.00000}";
-            series16.Legend = "Legend1";
-            series16.Name = "Merge";
-            series16.SmartLabelStyle.Enabled = false;
-            series16.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series16.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Bottom)));
-            series17.ChartArea = "ChartArea1";
-            series17.IsValueShownAsLabel = true;
-            series17.LabelAngle = -90;
-            series17.LabelFormat = "{0.00000}";
-            series17.Legend = "Legend1";
-            series17.Name = "Quick";
-            series17.SmartLabelStyle.Enabled = false;
-            series17.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series17.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Bottom)));
-            series18.ChartArea = "ChartArea1";
-            series18.IsValueShownAsLabel = true;
-            series18.LabelAngle = -90;
-            series18.LabelFormat = "{0.00000}";
-            series18.Legend = "Legend1";
-            series18.Name = "Selection";
-            series18.SmartLabelStyle.Enabled = false;
-            series18.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series18.SmartLabelStyle.MovingDirection = ((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles)((System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Top | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Bottom)));
-            this.barChart.Series.Add(series13);
-            this.barChart.Series.Add(series14);
-            this.barChart.Series.Add(series15);
-            this.barChart.Series.Add(series16);
-            this.barChart.Series.Add(series17);
-            this.barChart.Series.Add(series18);
-            this.barChart.Size = new System.Drawing.Size(747, 280);
-            this.barChart.TabIndex = 40;
-            this.barChart.Text = "barChart";
+            this.groupBox1.Controls.Add(this.dropdownTestType);
+            this.groupBox1.Controls.Add(this.load_file);
+            this.groupBox1.Controls.Add(this._label_file_name);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(747, 78);
+            this.groupBox1.TabIndex = 40;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Vrsta testiranja i odabir datoteke";
             // 
-            // lineChart
+            // groupBox2
             // 
-            chartArea4.AxisX.Title = "Veličina polja";
-            chartArea4.AxisY.Title = "Vrijeme u sekundama";
-            chartArea4.Name = "ChartArea1";
-            this.lineChart.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.lineChart.Legends.Add(legend4);
-            this.lineChart.Location = new System.Drawing.Point(12, 562);
-            this.lineChart.Name = "lineChart";
-            series19.ChartArea = "ChartArea1";
-            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series19.Legend = "Legend1";
-            series19.Name = "Bubble";
-            series20.ChartArea = "ChartArea1";
-            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series20.Legend = "Legend1";
-            series20.Name = "Heap";
-            series21.ChartArea = "ChartArea1";
-            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series21.Legend = "Legend1";
-            series21.Name = "Insertion";
-            series22.ChartArea = "ChartArea1";
-            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series22.Legend = "Legend1";
-            series22.Name = "Merge";
-            series23.ChartArea = "ChartArea1";
-            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series23.Legend = "Legend1";
-            series23.Name = "Quick";
-            series24.ChartArea = "ChartArea1";
-            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series24.Legend = "Legend1";
-            series24.Name = "Selection";
-            this.lineChart.Series.Add(series19);
-            this.lineChart.Series.Add(series20);
-            this.lineChart.Series.Add(series21);
-            this.lineChart.Series.Add(series22);
-            this.lineChart.Series.Add(series23);
-            this.lineChart.Series.Add(series24);
-            this.lineChart.Size = new System.Drawing.Size(747, 280);
-            this.lineChart.TabIndex = 41;
-            this.lineChart.Text = "lineChart";
+            this.groupBox2.Controls.Add(this.lbAlgs);
+            this.groupBox2.Controls.Add(this.btnAddRemoveAlgs);
+            this.groupBox2.Controls.Add(this.clbAlgorithms);
+            this.groupBox2.Location = new System.Drawing.Point(12, 96);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(327, 196);
+            this.groupBox2.TabIndex = 41;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Odabir algoritama";
             // 
-            // btnClearChart
+            // lbAlgs
             // 
-            this.btnClearChart.Enabled = false;
-            this.btnClearChart.Location = new System.Drawing.Point(532, 226);
-            this.btnClearChart.Name = "btnClearChart";
-            this.btnClearChart.Size = new System.Drawing.Size(90, 23);
-            this.btnClearChart.TabIndex = 42;
-            this.btnClearChart.Text = "Isprazni grafove";
-            this.btnClearChart.UseVisualStyleBackColor = true;
-            this.btnClearChart.Click += new System.EventHandler(this.btnClearChart_Click);
+            this.lbAlgs.Enabled = false;
+            this.lbAlgs.FormattingEnabled = true;
+            this.lbAlgs.Location = new System.Drawing.Point(185, 38);
+            this.lbAlgs.Name = "lbAlgs";
+            this.lbAlgs.Size = new System.Drawing.Size(120, 95);
+            this.lbAlgs.TabIndex = 42;
+            // 
+            // btnAddRemoveAlgs
+            // 
+            this.btnAddRemoveAlgs.Enabled = false;
+            this.btnAddRemoveAlgs.Location = new System.Drawing.Point(19, 150);
+            this.btnAddRemoveAlgs.Name = "btnAddRemoveAlgs";
+            this.btnAddRemoveAlgs.Size = new System.Drawing.Size(286, 23);
+            this.btnAddRemoveAlgs.TabIndex = 2;
+            this.btnAddRemoveAlgs.Text = "Dodaj/ukloni algoritme";
+            this.btnAddRemoveAlgs.UseVisualStyleBackColor = true;
+            this.btnAddRemoveAlgs.Click += new System.EventHandler(this.btnAddRemoveAlgs_Click);
+            // 
+            // clbAlgorithms
+            // 
+            this.clbAlgorithms.CheckOnClick = true;
+            this.clbAlgorithms.Enabled = false;
+            this.clbAlgorithms.FormattingEnabled = true;
+            this.clbAlgorithms.Items.AddRange(new object[] {
+            "Bubble sort",
+            "Heap sort",
+            "Insertion sort",
+            "Merge sort",
+            "Quick sort",
+            "Selection sort"});
+            this.clbAlgorithms.Location = new System.Drawing.Point(19, 38);
+            this.clbAlgorithms.Name = "clbAlgorithms";
+            this.clbAlgorithms.Size = new System.Drawing.Size(120, 94);
+            this.clbAlgorithms.TabIndex = 0;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dropdownTestCount);
+            this.groupBox3.Controls.Add(this._label_test_count);
+            this.groupBox3.Controls.Add(this._label_test1);
+            this.groupBox3.Controls.Add(this.tbTest1);
+            this.groupBox3.Controls.Add(this.tbTest2);
+            this.groupBox3.Controls.Add(this.tbMaxValue);
+            this.groupBox3.Controls.Add(this.tbTest3);
+            this.groupBox3.Controls.Add(this._label_max_value);
+            this.groupBox3.Controls.Add(this.tbMinValue);
+            this.groupBox3.Controls.Add(this._label_min_value);
+            this.groupBox3.Controls.Add(this._label_test2);
+            this.groupBox3.Controls.Add(this.tbTest5);
+            this.groupBox3.Controls.Add(this._label_test3);
+            this.groupBox3.Controls.Add(this._label_test5);
+            this.groupBox3.Controls.Add(this.tbTest4);
+            this.groupBox3.Controls.Add(this._label_test4);
+            this.groupBox3.Location = new System.Drawing.Point(346, 97);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(413, 195);
+            this.groupBox3.TabIndex = 42;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Broj testova i postavke polja";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnStartAlgorithmTests);
+            this.groupBox4.Controls.Add(this.btnStopTesting);
+            this.groupBox4.Controls.Add(this.btnSaveTestResults);
+            this.groupBox4.Location = new System.Drawing.Point(13, 299);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(746, 78);
+            this.groupBox4.TabIndex = 43;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Upravljanje testom";
             // 
             // MainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 843);
-            this.Controls.Add(this.btnClearChart);
-            this.Controls.Add(this.lineChart);
-            this.Controls.Add(this.barChart);
-            this.Controls.Add(this.btnStopTesting);
-            this.Controls.Add(this.btnSaveTestResults);
-            this.Controls.Add(this.tbMaxValue);
-            this.Controls.Add(this.tbMinValue);
-            this.Controls.Add(this.tbTest5);
-            this.Controls.Add(this.tbTest4);
-            this.Controls.Add(this.tbTest3);
-            this.Controls.Add(this.tbTest2);
-            this.Controls.Add(this.tbTest1);
-            this.Controls.Add(this._label_max_value);
-            this.Controls.Add(this._label_min_value);
-            this.Controls.Add(this.cbAlgorithmHeapSort);
-            this.Controls.Add(this._label_file_name);
-            this.Controls.Add(this._label_test5);
-            this.Controls.Add(this._label_test4);
-            this.Controls.Add(this._label_test3);
-            this.Controls.Add(this._label_test2);
-            this.Controls.Add(this._label_test1);
-            this.Controls.Add(this.dropdownTestCount);
-            this.Controls.Add(this._label_test_count);
-            this.Controls.Add(this.dropdownTestType);
-            this.Controls.Add(this._label_test_type);
-            this.Controls.Add(this.load_file);
-            this.Controls.Add(this.cbAlgorithmMergeSort);
-            this.Controls.Add(this.cbAlgorithmQuickSort);
-            this.Controls.Add(this.cbAlgorithmInsertionSort);
-            this.Controls.Add(this.cbAlgorithmBubbleSort);
-            this.Controls.Add(this.cbAlgorithmSelectSort);
-            this.Controls.Add(this._label_select_algorithm);
-            this.Controls.Add(this.btnStartAlgorithmTests);
+            this.ClientSize = new System.Drawing.Size(771, 426);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.testProgress);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainUI";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.tbTest1)).EndInit();
@@ -673,10 +513,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbTest5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMinValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMaxValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lineChart)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -688,18 +531,10 @@
         private System.Windows.Forms.Label _label_test3;
         private System.Windows.Forms.Label _label_test4;
         private System.Windows.Forms.Label _label_test5;
-        private System.Windows.Forms.Label _label_select_algorithm;
-        private System.Windows.Forms.CheckBox cbAlgorithmSelectSort;
-        private System.Windows.Forms.CheckBox cbAlgorithmBubbleSort;
-        private System.Windows.Forms.CheckBox cbAlgorithmInsertionSort;
-        private System.Windows.Forms.CheckBox cbAlgorithmQuickSort;
-        private System.Windows.Forms.CheckBox cbAlgorithmMergeSort;
         private System.Windows.Forms.Button load_file;
-        private System.Windows.Forms.Label _label_test_type;
         private System.Windows.Forms.ComboBox dropdownTestType;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label _label_file_name;
-        private System.Windows.Forms.CheckBox cbAlgorithmHeapSort;
         private System.Windows.Forms.ToolTip tbToolTip;
         private System.Windows.Forms.Label _label_min_value;
         private System.Windows.Forms.Label _label_max_value;
@@ -713,13 +548,17 @@
         public System.Windows.Forms.ProgressBar testProgress;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         public System.ComponentModel.BackgroundWorker backgroundWorker;
-        public System.Windows.Forms.DataVisualization.Charting.Chart barChart;
-        public System.Windows.Forms.DataVisualization.Charting.Chart lineChart;
         public System.Windows.Forms.Timer timer;
         public System.Windows.Forms.Button btnStartAlgorithmTests;
         public System.Windows.Forms.Button btnSaveTestResults;
         public System.Windows.Forms.Button btnStopTesting;
-        public System.Windows.Forms.Button btnClearChart;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckedListBox clbAlgorithms;
+        private System.Windows.Forms.Button btnAddRemoveAlgs;
+        private System.Windows.Forms.ListBox lbAlgs;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 

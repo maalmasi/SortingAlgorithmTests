@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using zavrsni_rad;
+using SortingAlgorithmTests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace zavrsni_rad.Tests
+namespace SortingAlgorithmTests.Tests
 {
     [TestClass()]
     public class AlgorithmTestsTests
@@ -37,9 +37,11 @@ namespace zavrsni_rad.Tests
             bool[] algorithms = new bool[6] { true, true, true, true, true, true };
             int[] array_size = new int[6] { 20, 0, 0, 0, 0, 0 };
             int min = -10, max = 10;
+            main.algorithms = new bool[6] { true, true, true, true, true, true };
+            main.testRepetitions = 1;
             AlgorithmTests test = new AlgorithmTests(algorithms, 1, array_size, min, max);
             test.GetMainReference(main);
-            test.SetProgressBar();
+            main.SetProgressBar();
             Assert.AreEqual(main.testProgress.Minimum, 0, "Progressbar minimum not set correctly");
             Assert.AreEqual(main.testProgress.Maximum, 6, "Progressbar maximum not set correctly");
             Assert.AreEqual(main.testProgress.Step, 1, "Progressbar step not set correctly");

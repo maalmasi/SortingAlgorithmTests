@@ -12,18 +12,18 @@ using System.Threading;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace zavrsni_rad
+namespace SortingAlgorithmTests
 {
     public partial class MainUI : Form
     {
-        private CheckBox[] checkBoxes;
         private NumericUpDown[] numericUpDowns;
         private NumericUpDown[] numericUpDownsMinMax;
-        bool[] algorithms = new bool[6];
-        int n_rep, min, max;
+        public bool[] algorithms = new bool[6];
+        public int testRepetitions, min, max;
         int[] array_size = new int[5];
-        string newFileName, newJsonFileName, newArrayFileName;
+        string newJsonFileName;
         AlgorithmTests test;
+        public GraphForm graphForm;
         public Stopwatch swatch;
         public int chartSeriesOrdinal = 0;
 
@@ -32,7 +32,6 @@ namespace zavrsni_rad
             InitializeComponent();
 
             numericUpDowns = new NumericUpDown[] { tbTest1, tbTest2, tbTest3, tbTest4, tbTest5 };
-            checkBoxes = new CheckBox[] { cbAlgorithmBubbleSort, cbAlgorithmHeapSort, cbAlgorithmInsertionSort, cbAlgorithmMergeSort, cbAlgorithmQuickSort, cbAlgorithmSelectSort };
             numericUpDownsMinMax = new NumericUpDown[] { tbMinValue, tbMaxValue };
             this.Text = "Aplikacija za testiranje algoritama sortiranja";
             _label_file_name.Text = "Ime datoteke";
@@ -40,8 +39,8 @@ namespace zavrsni_rad
             InitializeBackgroundWorkerHandlers();
         }
 
+        //"start test" button funcitonality
         public void btnStartAlgorithmTests_Click(object sender, EventArgs e)
-            //"start test" button funcitonality
         {
             if (dropdownTestType.SelectedItem == null)
             {
@@ -54,7 +53,7 @@ namespace zavrsni_rad
                 Console.WriteLine(this);
             }
 
-            else if (!CheckCheckBoxes() && dropdownTestType.SelectedIndex == 0)
+            else if (lbAlgs.Items.Count == 0 && dropdownTestType.SelectedIndex == 0)
             {
                     MessageBox.Show(
                         "Niste odabrali nijedan algoritam!", 
@@ -97,18 +96,21 @@ namespace zavrsni_rad
                 if (dropdownTestType.SelectedIndex == 0)
                 {
                     GetDataFromUI();
-                    test = new AlgorithmTests(algorithms, n_rep, array_size, min, max);
+                    test = new AlgorithmTests(algorithms, testRepetitions, array_size, min, max);
                     test.GetMainReference(this);
+                    newJsonFileName = "test_" + DateTime.Now.ToString("ddMMyy_HHmmss") + ".json";
                 }
                 btnStartAlgorithmTests.Enabled = false;
                 btnStopTesting.Enabled = true;
+                InitializeGraphForm();
+                graphForm.EnableChartSeries();
                 SetTimer();
                 RunAlgorithmTests();
             }
         }
 
+        //start a timer to time the entire test
         private void SetTimer()
-            //start a timer to time the entire test
         {
             timer.Tick += new EventHandler(TimerTick);
             timer.Start();
@@ -116,8 +118,8 @@ namespace zavrsni_rad
             swatch.Start();
         }
 
+        //timer event to display time
         private void TimerTick(object sender, EventArgs e)
-            //timer event to display time
         {
             this.Text = "Proteklo vrijeme: "
                 + swatch.Elapsed.Hours.ToString() + ":"
@@ -125,12 +127,13 @@ namespace zavrsni_rad
                 + swatch.Elapsed.Seconds.ToString();
         }
 
+        //background worker to do the testing
         private void RunAlgorithmTests()
-            //background worker to do the testing
         {
             backgroundWorker.RunWorkerAsync();
         }
 
+        //background worker initialization
         private void InitializeBackgroundWorkerHandlers()
         {
             backgroundWorker.DoWork += (s, e) =>
@@ -143,15 +146,14 @@ namespace zavrsni_rad
                 timer.Stop();
                 swatch.Stop();
                 ShowCompleteMessage();
-                btnClearChart.Enabled = true;
                 btnStopTesting.Enabled = false;
                 btnSaveTestResults.Enabled = true;
                 btnStartAlgorithmTests.Enabled = true;
             };
         }
 
+        //show this message on successful test complete
         private void ShowCompleteMessage()
-            //show this message on successful test complete
         {
             string title = "Test završen!";
             string message = "Test završen nakon"
@@ -165,8 +167,8 @@ namespace zavrsni_rad
             }
         }
 
+        //cancel testing
         private void btnStopTesting_Click(object sender, EventArgs e)
-            //cancel testing
         {
             backgroundWorker.CancelAsync();
             swatch.Stop();
@@ -174,18 +176,17 @@ namespace zavrsni_rad
             btnSaveTestResults.Enabled = false;
         }
 
+        //save test results
         private void btnSaveTestResults_Click(object sender, EventArgs e)
-            //save test results
         {
             SetProgressBarFile();
-            CreateFileNames();
             WriteJSON(test);
             testProgress.PerformStep();
             testProgress.PerformStep();
         }
 
+        //set up the progress bar for file saving
         private void SetProgressBarFile()
-            //set up the progress bar for file saving
         {
             testProgress.Minimum = 0;
             testProgress.Maximum = 1;
@@ -193,8 +194,8 @@ namespace zavrsni_rad
             testProgress.Value = 0;
         }
 
+        //test type selection (random/file)
         private void dropdownTestType_SelectedIndexChanged(object sender, EventArgs e)
-            //test type selection (random/file)
         {
             if (dropdownTestType.SelectedIndex == 0) //random
             {
@@ -205,7 +206,7 @@ namespace zavrsni_rad
                 dropdownTestCount.Enabled = true;
                 DisableTextboxes();
                 EnableMinMaxUpDowns();
-                EnableCheckBoxes();
+                EnableAlgorithmSelection();
                 btnStartAlgorithmTests.Enabled = true;
                 if (dropdownTestCount.SelectedIndex != null)
                 {
@@ -221,19 +222,19 @@ namespace zavrsni_rad
                 dropdownTestCount.Enabled = false;
                 DisableTextboxes();
                 DisableMinMaxUpDowns();
-                DisableCheckBoxes();
+                DisableAlgorithmSelection();
                 btnStartAlgorithmTests.Enabled = false;
             }
         }
 
+        //test count (1-5)
         private void dropdownTestCount_SelectedIndexChanged(object sender, EventArgs e)
-            //test count (1-5)
         {
             DropdownEnableTextboxes(dropdownTestCount.SelectedIndex);
         }
 
+        //load file and import data from file
         private void load_file_Click(object sender, EventArgs e)
-            //load file and import data from file
         {
             if(openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -248,28 +249,14 @@ namespace zavrsni_rad
             }
         }
 
-        private bool CheckCheckBoxes()
-        {
-            bool is_checked = false;
-
-            foreach (CheckBox box in checkBoxes)
-            {
-                if (box.Checked == true)
-                {
-                    is_checked = true;
-                }
-            }
-
-            return is_checked;
-        }
-
+        //check if at least 1 textbox is not empty
         private bool CheckTextBoxes()
         {
             bool filled = true;
 
             foreach (NumericUpDown box in numericUpDowns)
             {
-                if (box.Enabled == true && box.Text == "")
+                if (box.Enabled == true && box.Text == "0")
                 {
                     filled = false;
                 }
@@ -278,6 +265,7 @@ namespace zavrsni_rad
             return filled;
         }
 
+        //check if test count is not 0
         private bool CheckTestCount()
         {
             bool is_selected = true;
@@ -291,6 +279,7 @@ namespace zavrsni_rad
             return is_selected;
         }
 
+        //enable textboxes depending on test count
         private void DropdownEnableTextboxes(int n)
         {
             foreach (NumericUpDown box in numericUpDowns)
@@ -303,6 +292,7 @@ namespace zavrsni_rad
             }
         }
 
+        //disable textboxes
         private void DisableTextboxes()
         {
             foreach (NumericUpDown box in numericUpDowns)
@@ -311,6 +301,7 @@ namespace zavrsni_rad
             }
         }
 
+        //enable min and max array size textboxes
         private void EnableMinMaxUpDowns()
         {
             foreach (NumericUpDown box in numericUpDownsMinMax)
@@ -319,6 +310,7 @@ namespace zavrsni_rad
             }
         }
 
+        //disable min and max array size textboxes
         private void DisableMinMaxUpDowns()
         {
             foreach (NumericUpDown box in numericUpDownsMinMax)
@@ -327,55 +319,27 @@ namespace zavrsni_rad
             }
         }
 
-        private void EnableCheckBoxes()
+        //enable checkboxes
+        private void EnableAlgorithmSelection()
         {
-            foreach (CheckBox box in checkBoxes)
-            {
-                box.Enabled = true;
-            }
+            lbAlgs.Enabled = true;
+            clbAlgorithms.Enabled = true;
+            btnAddRemoveAlgs.Enabled = true;
         }
 
-        private void DisableCheckBoxes()
+        //disable checkboxes
+        private void DisableAlgorithmSelection()
         {
-            foreach (CheckBox box in checkBoxes)
-            {
-                box.Enabled = false;
-            }
+            lbAlgs.Enabled = false;
+            clbAlgorithms.Enabled = false;
+            btnAddRemoveAlgs.Enabled = false;
         }
 
-        private void btnClearChart_Click(object sender, EventArgs e)
-            //clear everything from charts
-        {
-            ClearCharts();
-            btnStartAlgorithmTests.Enabled = true;
-            btnSaveTestResults.Enabled = false;
-            btnClearChart.Enabled = false;
-            chartSeriesOrdinal = 0;
-        }
-
-        public void ClearCharts()
-        {
-            foreach (var series in barChart.Series)
-            {
-                series.Points.Clear();
-            }
-            foreach (var series in lineChart.Series)
-            {
-                series.Points.Clear();
-            }
-        }
-
+        //fetch values from UI controls and
+        //store them into variables
         private void GetDataFromUI()
-            //fetch values from UI controls and
-            //store them into variables
         {
-            algorithms[0] = cbAlgorithmBubbleSort.Checked;
-            algorithms[1] = cbAlgorithmHeapSort.Checked;
-            algorithms[2] = cbAlgorithmInsertionSort.Checked;
-            algorithms[3] = cbAlgorithmMergeSort.Checked;
-            algorithms[4] = cbAlgorithmQuickSort.Checked;
-            algorithms[5] = cbAlgorithmSelectSort.Checked;
-            n_rep = dropdownTestCount.SelectedIndex + 1;
+            testRepetitions = dropdownTestCount.SelectedIndex + 1;
             array_size[0] = (int)tbTest1.Value;
             array_size[1] = (int)tbTest2.Value;
             array_size[2] = (int)tbTest3.Value;
@@ -385,18 +349,11 @@ namespace zavrsni_rad
             max = (int)tbMaxValue.Value;
         }
 
-        private void CreateFileNames()
-        {
-            newFileName = "C:\\testresults\\test_" + DateTime.Now.ToString("ddMMyy_HHmmss");
-            newJsonFileName = newFileName + ".json";
-            newArrayFileName = newFileName + ".txt";
-        }
-
+        //write JSON file with object data
         private void WriteJSON(AlgorithmTests test)
-            //write JSON file with object data
         {
             saveFileDialog.FileName = newJsonFileName;
-            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             string json = JsonConvert.SerializeObject(test);
             if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -406,20 +363,9 @@ namespace zavrsni_rad
             }
         }
 
-        //private void WriteArrays(AlgorithmTests test)
-        //{
-        //    System.IO.File.WriteAllLines(newArrayFileName, test.array.Select(i=>i.ToString()));
-        //}
-
+        //fill UI controls with data from imported object
         private void FillUIElements()
-            //fill UI controls with data from imported object
         {
-            cbAlgorithmBubbleSort.Checked = test.algorithms[0];
-            cbAlgorithmHeapSort.Checked = test.algorithms[1];
-            cbAlgorithmInsertionSort.Checked = test.algorithms[2];
-            cbAlgorithmMergeSort.Checked = test.algorithms[3];
-            cbAlgorithmQuickSort.Checked = test.algorithms[4];
-            cbAlgorithmSelectSort.Checked = test.algorithms[5];
             dropdownTestCount.SelectedIndex = test.n_rep - 1;
             tbTest1.Value = test.array_size[0];
             tbTest2.Value = test.array_size[1];
@@ -429,29 +375,76 @@ namespace zavrsni_rad
             tbMaxValue.Value = test.max;
             tbMinValue.Value = test.min;
             DisableTextboxes();
+            lbAlgs.Items.Clear();
+            if (test.algorithms[0])
+            {
+                lbAlgs.Items.Add("Bubble sort");
+                clbAlgorithms.SetItemChecked(0, true);
+            }
+            if (test.algorithms[1])
+            {
+                lbAlgs.Items.Add("Heap sort");
+                clbAlgorithms.SetItemChecked(1, true);
+            }
+            if (test.algorithms[2])
+            {
+                lbAlgs.Items.Add("Insertion sort");
+                clbAlgorithms.SetItemChecked(2, true);
+            }
+            if (test.algorithms[3])
+            {
+                lbAlgs.Items.Add("Merge sort");
+                clbAlgorithms.SetItemChecked(3, true);
+            }
+            if (test.algorithms[4])
+            {
+                lbAlgs.Items.Add("Quick sort");
+                clbAlgorithms.SetItemChecked(4, true);
+            }
+            if (test.algorithms[5])
+            {
+                lbAlgs.Items.Add("Selection sort");
+                clbAlgorithms.SetItemChecked(5, true);
+            }
         }
 
+        private void clbAlgorithmsChecked()
+        {
+            lbAlgs.Items.Clear();
+            for (int i = 0; i <= clbAlgorithms.Items.Count-1; i++)
+            {
+                if (clbAlgorithms.GetItemChecked(i))
+                {
+                    algorithms[i] = true;
+                    lbAlgs.Items.Add(clbAlgorithms.Items[i].ToString());
+                }
+                else
+                {
+                    algorithms[i] = false;
+                }
+            }
+        }
+
+        private void btnAddRemoveAlgs_Click(object sender, EventArgs e)
+        {
+            clbAlgorithmsChecked();
+        }
+
+        //set up progress bar on UI
         public void SetProgressBar()
         {
             testProgress.Minimum = 0;
-            testProgress.Maximum = (algorithms.Where(c => c).Count()) * n_rep;
+            testProgress.Maximum = (algorithms.Where(c => c).Count()) * testRepetitions;
             testProgress.Step = 1;
             testProgress.Value = 0;
         }
 
-        public void DisplayDataToGraph(string series, int x, double y)
+        public void InitializeGraphForm()
         {
-            barChart.Series[series].Points.AddXY(x + 1, y);
-            lineChart.Series[series].Points.AddXY(array_size[test.test_ordinal], y);
-        }
-
-        public void DisplayDataToGraphFromFile(string series, int x, double y)
-        {
-            if (y != 0)
-            {
-                barChart.Series[series].Points.AddXY(x + 1, y);
-                lineChart.Series[series].Points.AddXY(array_size[x], y);
-            }
+            graphForm = new GraphForm(test);
+            graphForm.Show();
+            graphForm.EnableChartSeries();
+            Thread.Sleep(1000);
         }
     }
 }

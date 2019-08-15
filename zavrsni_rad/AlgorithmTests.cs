@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace zavrsni_rad
+namespace SortingAlgorithmTests
 {
     public class AlgorithmTests
     {
         public int[] array, array_copy;
         public int[] array_size;
-        public int n_rep, min, max, test_ordinal, counter;
+        public int n_rep, min, max, test_ordinal;
         public bool[] algorithms;
         public double[] timeBubble, timeHeap, timeInsertion, timeMerge, timeQuick, timeSelection;
+        public float[] comparisonCounterBubble, comparisonCounterHeap, comparisonCounterInsertion, comparisonCounterMerge, comparisonCounterQuick, comparisonCounterSelection;
         MainUI main;
         public bool complete;
 
@@ -34,12 +31,17 @@ namespace zavrsni_rad
             timeMerge = new double[5];
             timeQuick = new double[5];
             timeSelection = new double[5];
+            comparisonCounterBubble = new float[5];
+            comparisonCounterHeap = new float[5];
+            comparisonCounterInsertion = new float[5];
+            comparisonCounterMerge = new float[5];
+            comparisonCounterQuick = new float[5];
+            comparisonCounterSelection = new float[5];
             algorithms = _algorithms;
             array_size = _array_size;
             n_rep = _n_rep;
             min = _min;
             max = _max;
-            counter = 0;
             test_ordinal = 0;
             complete = true;
         }
@@ -61,10 +63,10 @@ namespace zavrsni_rad
                     array_copy = (int[])array.Clone();
                     swatch.Reset();
                     swatch.Start();
-                    Algorithms.BubbleSort(array_copy, array_size[test_ordinal]);
+                    comparisonCounterBubble[test_ordinal] = Algorithms.BubbleSort(array_copy, array_size[test_ordinal]);
                     swatch.Stop();
                     timeBubble[test_ordinal] = swatch.Elapsed.TotalSeconds;
-                    main.DisplayDataToGraph("Bubble", main.chartSeriesOrdinal, timeBubble[test_ordinal]);
+                    main.graphForm.DisplayDataToGraph("Bubble", test_ordinal, timeBubble[test_ordinal], array_size[test_ordinal], comparisonCounterBubble[test_ordinal]);
                     main.testProgress.PerformStep();
                     Thread.Sleep(100);
                 }
@@ -73,10 +75,10 @@ namespace zavrsni_rad
                     array_copy = (int[])array.Clone();
                     swatch.Reset();
                     swatch.Start();
-                    Algorithms.HeapSort(array_copy, array_size[test_ordinal]);
+                    comparisonCounterHeap[test_ordinal] = Algorithms.HeapSort(array_copy, array_size[test_ordinal]);
                     swatch.Stop();
                     timeHeap[test_ordinal] = swatch.Elapsed.TotalSeconds;
-                    main.DisplayDataToGraph("Heap", main.chartSeriesOrdinal, timeHeap[test_ordinal]);
+                    main.graphForm.DisplayDataToGraph("Heap", test_ordinal, timeHeap[test_ordinal], array_size[test_ordinal], comparisonCounterHeap[test_ordinal]);
                     main.testProgress.PerformStep();
                     Thread.Sleep(100);
                 }
@@ -85,10 +87,10 @@ namespace zavrsni_rad
                     array_copy = (int[])array.Clone();
                     swatch.Reset();
                     swatch.Start();
-                    Algorithms.InsertionSort(array_copy, array_size[test_ordinal]);
+                    comparisonCounterInsertion[test_ordinal] = Algorithms.InsertionSort(array_copy, array_size[test_ordinal]);
                     swatch.Stop();
                     timeInsertion[test_ordinal] = swatch.Elapsed.TotalSeconds;
-                    main.DisplayDataToGraph("Insertion", main.chartSeriesOrdinal, timeInsertion[test_ordinal]);
+                    main.graphForm.DisplayDataToGraph("Insertion", test_ordinal, timeInsertion[test_ordinal], array_size[test_ordinal], comparisonCounterInsertion[test_ordinal]);
                     main.testProgress.PerformStep();
                     Thread.Sleep(100);
                 }
@@ -97,10 +99,10 @@ namespace zavrsni_rad
                     array_copy = (int[])array.Clone();
                     swatch.Reset();
                     swatch.Start();
-                    Algorithms.MergeSort(array_copy, 0, array_size[test_ordinal] - 1);
+                    comparisonCounterMerge[test_ordinal] = Algorithms.MergeSort(array_copy, 0, array_size[test_ordinal] - 1);
                     swatch.Stop();
                     timeMerge[test_ordinal] = swatch.Elapsed.TotalSeconds;
-                    main.DisplayDataToGraph("Merge", main.chartSeriesOrdinal, timeMerge[test_ordinal]);
+                    main.graphForm.DisplayDataToGraph("Merge", test_ordinal, timeMerge[test_ordinal], array_size[test_ordinal], comparisonCounterMerge[test_ordinal]);
                     main.testProgress.PerformStep();
                     Thread.Sleep(100);
                 }
@@ -109,10 +111,10 @@ namespace zavrsni_rad
                     array_copy = (int[])array.Clone();
                     swatch.Reset();
                     swatch.Start();
-                    Algorithms.QuickSort(array_copy, 0, array_size[test_ordinal] - 1);
+                    comparisonCounterQuick[test_ordinal] = Algorithms.QuickSort(array_copy, 0, array_size[test_ordinal] - 1);
                     swatch.Stop();
                     timeQuick[test_ordinal] = swatch.Elapsed.TotalSeconds;
-                    main.DisplayDataToGraph("Quick", main.chartSeriesOrdinal, timeQuick[test_ordinal]);
+                    main.graphForm.DisplayDataToGraph("Quick", test_ordinal, timeQuick[test_ordinal], array_size[test_ordinal], comparisonCounterQuick[test_ordinal]);
                     main.testProgress.PerformStep();
                     Thread.Sleep(100);
                 }
@@ -121,10 +123,10 @@ namespace zavrsni_rad
                     array_copy = (int[])array.Clone();
                     swatch.Reset();
                     swatch.Start();
-                    Algorithms.SelectionSort(array_copy, array_size[test_ordinal]);
+                    comparisonCounterSelection[test_ordinal] = Algorithms.SelectionSort(array_copy, array_size[test_ordinal]);
                     swatch.Stop();
                     timeSelection[test_ordinal] = swatch.Elapsed.TotalSeconds;
-                    main.DisplayDataToGraph("Selection", main.chartSeriesOrdinal, timeSelection[test_ordinal]);
+                    main.graphForm.DisplayDataToGraph("Selection", test_ordinal, timeSelection[test_ordinal], array_size[test_ordinal], comparisonCounterSelection[test_ordinal]);
                     main.testProgress.PerformStep();
                     Thread.Sleep(100);
                 }
@@ -133,7 +135,6 @@ namespace zavrsni_rad
                 if (main.backgroundWorker.CancellationPending)
                 {
                     main.testProgress.Value = main.testProgress.Maximum;
-                    main.btnClearChart.Enabled = true;
                     main.btnStopTesting.Enabled = false;
                     main.btnSaveTestResults.Enabled = false;
                     complete = false;
@@ -145,7 +146,7 @@ namespace zavrsni_rad
             }
         }
 
-        private void ShowCancelledMessage()
+        public void ShowCancelledMessage()
         {
             string message = "Test zaustavljen nakon: "
                         + swatch.Elapsed.Hours.ToString() + ":"
@@ -158,16 +159,16 @@ namespace zavrsni_rad
 
         public void DisplayDataFromFile()
         {
+            main.InitializeGraphForm();
             for (int i = 0; i < n_rep; i++)
             {
-                main.DisplayDataToGraphFromFile("Bubble", main.chartSeriesOrdinal, timeBubble[i]);
-                main.DisplayDataToGraphFromFile("Heap", main.chartSeriesOrdinal, timeHeap[i]);
-                main.DisplayDataToGraphFromFile("Insertion", main.chartSeriesOrdinal, timeInsertion[i]);
-                main.DisplayDataToGraphFromFile("Merge", main.chartSeriesOrdinal, timeMerge[i]);
-                main.DisplayDataToGraphFromFile("Quick", main.chartSeriesOrdinal, timeQuick[i]);
-                main.DisplayDataToGraphFromFile("Selection", main.chartSeriesOrdinal, timeSelection[i]);
+                main.graphForm.DisplayDataToGraphFromFile("Bubble", i, timeBubble[i], array_size[i], comparisonCounterBubble[i]);
+                main.graphForm.DisplayDataToGraphFromFile("Heap", i, timeHeap[i], array_size[i], comparisonCounterHeap[i]);
+                main.graphForm.DisplayDataToGraphFromFile("Insertion", i, timeInsertion[i], array_size[i], comparisonCounterInsertion[i]);
+                main.graphForm.DisplayDataToGraphFromFile("Merge", i, timeMerge[i], array_size[i], comparisonCounterMerge[i]);
+                main.graphForm.DisplayDataToGraphFromFile("Quick", i, timeQuick[i], array_size[i], comparisonCounterQuick[i]);
+                main.graphForm.DisplayDataToGraphFromFile("Selection", i, timeSelection[i], array_size[i], comparisonCounterSelection[i]);
                 main.chartSeriesOrdinal++;
-                main.btnClearChart.Enabled = true;
             }
         }
 
@@ -193,11 +194,11 @@ namespace zavrsni_rad
         {
             return false;
         }
-        public bool ShouldSerializecounter()
+        public bool ShouldSerializetest_ordinal()
         {
             return false;
         }
-        public bool ShouldSerializetest_ordinal()
+        public bool ShouldSerializecomplete()
         {
             return false;
         }

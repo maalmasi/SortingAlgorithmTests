@@ -1,12 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using zavrsni_rad;
+using SortingAlgorithmTests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zavrsni_rad.Tests
+namespace SortingAlgorithmTests.Tests
 {
     [TestClass()]
     public class AlgorithmsTests

@@ -1,29 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace zavrsni_rad
+namespace SortingAlgorithmTests
 {
     public static class Algorithms
     {
-        public static void BubbleSort(int[] arr, int n)
+        public static float BubbleSort(int[] arr, int n)
         {
+            float count = 0;
             for (int i = 0; i < n - 1; i++)
                 for (int j = 0; j < n - i - 1; j++)
+                {
                     if (arr[j] > arr[j + 1])
                     {
                         int temp = arr[j];
                         arr[j] = arr[j + 1];
                         arr[j + 1] = temp;
                     }
+                    count++;
+                }
+            return count;
         }
 
-        public static void HeapSort(int[] arr, int n)
+        public static float HeapSort(int[] arr, int n)
         {
+            float count = 0;
             for (int i = n / 2 - 1; i >= 0; i--)
-                Heapify(arr, n, i);
+                count += Heapify(arr, n, i);
 
             for (int i = n - 1; i >= 0; i--)
             {
@@ -31,20 +33,24 @@ namespace zavrsni_rad
                 arr[0] = arr[i];
                 arr[i] = temp;
 
-                Heapify(arr, i, 0);
+                count += Heapify(arr, i, 0);
             }
+            return count;
         }
-        static void Heapify(int[] arr, int n, int i)
+        static float Heapify(int[] arr, int n, int i)
         {
+            float count = 0;
             int largest = i;
             int l = 2 * i + 1;
             int r = 2 * i + 2;
 
             if (l < n && arr[l] > arr[largest])
                 largest = l;
+            count++;
 
             if (r < n && arr[r] > arr[largest])
                 largest = r;
+            count++;
 
             if (largest != i)
             {
@@ -52,12 +58,16 @@ namespace zavrsni_rad
                 arr[i] = arr[largest];
                 arr[largest] = swap;
 
-                Heapify(arr, n, largest);
+                count += Heapify(arr, n, largest);
             }
+            count++;
+
+            return count;
         }
 
-        public static void InsertionSort(int[] arr, int n)
+        public static float InsertionSort(int[] arr, int n)
         {
+            float count = 0;
             for (int i = 1; i < n; ++i)
             {
                 int key = arr[i];
@@ -67,24 +77,30 @@ namespace zavrsni_rad
                 {
                     arr[j + 1] = arr[j];
                     j = j - 1;
+                    count++;
                 }
                 arr[j + 1] = key;
             }
+            return count;
         }
 
-        public static void MergeSort(int[] arr, int p, int r)
+        public static float MergeSort(int[] arr, int p, int r)
         {
+            float count = 0;
             if (p < r)
             {
                 int q = (p + r) / 2;
-                MergeSort(arr, p, q);
-                MergeSort(arr, q + 1, r);
-                Merge(arr, p, q, r);
+                count += MergeSort(arr, p, q);
+                count += MergeSort(arr, q + 1, r);
+                count += Merge(arr, p, q, r);
             }
+            return count;
         }
-        static void Merge(int[] arr, int p, int q, int r)
+
+        static float Merge(int[] arr, int p, int q, int r)
         {
             int i, j, k;
+            float count = 0;
             int n1 = q - p + 1;
             int n2 = r - q;
             int[] L = new int[n1];
@@ -113,6 +129,7 @@ namespace zavrsni_rad
                     j++;
                 }
                 k++;
+                count++;
             }
             while (i < n1)
             {
@@ -126,21 +143,26 @@ namespace zavrsni_rad
                 j++;
                 k++;
             }
+            return count;
         }
 
-        public static void QuickSort(int[] arr, int low, int high)
+        public static float QuickSort(int[] arr, int low, int high)
         {
+            float count = 0;
             if (low < high)
             {
-                int pi = Partition(arr, low, high);
-
-                QuickSort(arr, low, pi - 1);
-                QuickSort(arr, pi + 1, high);
+                var result = Partition(arr, low, high);
+                int pi = result.Item1;
+                count += result.Item2;
+                count += QuickSort(arr, low, pi - 1);
+                count += QuickSort(arr, pi + 1, high);
             }
+            return count;
         }
-        static int Partition(int[] arr, int low, int high)
+        static Tuple<int, float> Partition(int[] arr, int low, int high)
         {
             int pivot = arr[high];
+                float count = 0;
 
             int i = (low - 1);
             for (int j = low; j < high; j++)
@@ -153,28 +175,33 @@ namespace zavrsni_rad
                     arr[i] = arr[j];
                     arr[j] = temp;
                 }
+                count++;
             }
 
             int temp1 = arr[i + 1];
             arr[i + 1] = arr[high];
             arr[high] = temp1;
 
-            return i + 1;
+            return Tuple.Create(i + 1, count);
         }
 
-        public static void SelectionSort(int[] arr, int n)
+        public static float SelectionSort(int[] arr, int n)
         {
+            float count = 0;
             for (int i = 0; i < n - 1; i++)
             {
                 int min_idx = i;
                 for (int j = i + 1; j < n; j++)
+                {
                     if (arr[j] < arr[min_idx])
                         min_idx = j;
-
+                    count++;
+                }
                 int temp = arr[min_idx];
                 arr[min_idx] = arr[i];
                 arr[i] = temp;
             }
+            return count;
         }
     }
 }

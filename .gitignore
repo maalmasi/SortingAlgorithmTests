@@ -1,0 +1,5 @@
+zavrsni_rad/obj/*
+zavrsni_rad/bin/*
+SortingAlgorithmTestsTests/obj/*
+SortingAlgorithmTestsTests/bin/*
+/.vs/SortingAlgorithmTests/v15

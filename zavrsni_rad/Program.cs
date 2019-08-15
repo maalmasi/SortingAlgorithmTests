@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace zavrsni_rad
+namespace SortingAlgorithmTests
 {
     static class Program
     {
